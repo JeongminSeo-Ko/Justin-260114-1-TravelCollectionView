@@ -52,19 +52,34 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xDg-DU-k6s">
+                                <rect key="frame" x="20" y="191" width="353" height="32"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                                <connections>
+                                    <action selector="travelSegmentedControlSelected:" destination="84i-rN-55w" eventType="valueChanged" id="Q28-7T-iV8"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HDS-11-Qlh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="xDg-DU-k6s" firstAttribute="centerX" secondItem="iOw-tp-jwT" secondAttribute="centerX" id="FsW-E0-jc9"/>
                             <constraint firstItem="HDS-11-Qlh" firstAttribute="trailing" secondItem="u2F-My-gfZ" secondAttribute="trailing" id="I8L-ba-10m"/>
                             <constraint firstItem="u2F-My-gfZ" firstAttribute="leading" secondItem="HDS-11-Qlh" secondAttribute="leading" id="SE8-hp-4rM"/>
+                            <constraint firstItem="HDS-11-Qlh" firstAttribute="trailing" secondItem="xDg-DU-k6s" secondAttribute="trailing" constant="20" id="e7s-rE-HWT"/>
                             <constraint firstItem="HDS-11-Qlh" firstAttribute="bottom" secondItem="u2F-My-gfZ" secondAttribute="bottom" id="lAg-PW-jhQ"/>
                             <constraint firstItem="u2F-My-gfZ" firstAttribute="top" secondItem="HDS-11-Qlh" secondAttribute="top" constant="60" id="oJq-XU-MoT"/>
+                            <constraint firstItem="xDg-DU-k6s" firstAttribute="leading" secondItem="HDS-11-Qlh" secondAttribute="leading" constant="20" id="uqD-Sk-4bQ"/>
+                            <constraint firstItem="u2F-My-gfZ" firstAttribute="top" secondItem="xDg-DU-k6s" secondAttribute="bottom" constant="10" id="ziu-0f-1hw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="iV9-j8-TED"/>
                     <connections>
                         <outlet property="cityCollectionView" destination="u2F-My-gfZ" id="C87-N8-Ubz"/>
+                        <outlet property="travelSegmentedControl" destination="xDg-DU-k6s" id="tzQ-Js-3nP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rkW-89-Ucl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

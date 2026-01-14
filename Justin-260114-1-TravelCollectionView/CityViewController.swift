@@ -9,9 +9,11 @@ import UIKit
 
 class CityViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    @IBOutlet var travelSegmentedControl: UISegmentedControl!
     @IBOutlet var cityCollectionView: UICollectionView!
     
     var cityInfo = CityInfo()
+    var selectedCities: [City] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +26,7 @@ class CityViewController: UIViewController, UICollectionViewDelegate, UICollecti
         view.backgroundColor = .white
         cityCollectionView.backgroundColor = .white
         navigationItem.title = "인기 도시"
+        setTravelSegmentedControl()
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -33,25 +36,54 @@ class CityViewController: UIViewController, UICollectionViewDelegate, UICollecti
         layout.minimumLineSpacing = 10
         cityCollectionView.collectionViewLayout = layout
         
+        selectedCities = cityInfo.city
     }
     
+    func setTravelSegmentedControl() {
+        travelSegmentedControl.removeAllSegments()
+        travelSegmentedControl.insertSegment(withTitle: "모두", at: 0, animated: false)
+        travelSegmentedControl.insertSegment(withTitle: "국내", at: 1, animated: false)
+        travelSegmentedControl.insertSegment(withTitle: "해외", at: 2, animated: false)
+        travelSegmentedControl.selectedSegmentIndex = 0
+    }
+    
+    @IBAction func travelSegmentedControlSelected(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            selectedCities = cityInfo.city
+            cityCollectionView.reloadData()
+        case 1:
+            selectedCities = cityInfo.domesticCities
+            cityCollectionView.reloadData()
+        case 2:
+            selectedCities = cityInfo.internationalCities
+            cityCollectionView.reloadData()
+        default:
+            break
+        }
+        if selectedCities.count > 0 {
+            cityCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+        }
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cityInfo.city.count
+        return selectedCities.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CityCollectionViewCell.identifier, for: indexPath) as! CityCollectionViewCell
         
-        let item = cityInfo.city[indexPath.item]
+        let item = selectedCities[indexPath.item]
         cell.configure(item: item)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if cityInfo.city[indexPath.item].domestic_travel == false {
+        if selectedCities[indexPath.item].domestic_travel == false {
             let vc = storyboard!.instantiateViewController(withIdentifier: InternationalCityViewController.identifier) as! InternationalCityViewController
-            vc.selectedCity = cityInfo.city[indexPath.item]
+            vc.selectedCity = selectedCities[indexPath.item]
             
             let nac = UINavigationController(rootViewController: vc)
             nac.modalPresentationStyle = .fullScreen
@@ -59,7 +91,7 @@ class CityViewController: UIViewController, UICollectionViewDelegate, UICollecti
             present(nac, animated: true)
         } else {
             let vc = storyboard!.instantiateViewController(withIdentifier: DomesticCityViewController.identifier) as! DomesticCityViewController
-            vc.selectedCity = cityInfo.city[indexPath.item]
+            vc.selectedCity = selectedCities[indexPath.item]
             
             navigationController?.pushViewController(vc, animated: true)
         }
