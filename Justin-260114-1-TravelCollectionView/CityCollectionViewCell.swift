@@ -28,7 +28,9 @@ class CityCollectionViewCell: UICollectionViewCell {
         cityImageView.backgroundColor = .black
         cityImageView.layer.borderColor = UIColor.clear.cgColor
         cityImageView.contentMode = .scaleAspectFill
-        cityImageView.layer.cornerRadius = 72   // (width-16)/2
+        DispatchQueue.main.async {
+            self.cityImageView.layer.cornerRadius = (self.cityImageView.frame.width) / 2
+        }
         cityImageView.clipsToBounds = true
     }
     

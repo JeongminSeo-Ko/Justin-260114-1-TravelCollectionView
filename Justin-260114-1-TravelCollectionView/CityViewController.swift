@@ -25,18 +25,55 @@ class CityViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         view.backgroundColor = .white
         cityCollectionView.backgroundColor = .white
-        navigationItem.title = "인기 도시"
+        
+        setNavigationBarButtonItem()
         setTravelSegmentedControl()
         
+        let inset: CGFloat = 25
+        let itemSpacing: CGFloat = 40
+        let lineSpacing: CGFloat = 5
         let layout = UICollectionViewFlowLayout()
+        
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: 160, height: 240)
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 25, bottom: 20, right: 25)
-        layout.minimumInteritemSpacing = 5
-        layout.minimumLineSpacing = 10
+        layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+        layout.minimumInteritemSpacing = itemSpacing
+        layout.minimumLineSpacing = lineSpacing
+        
+        let width = UIScreen.main.bounds.width - (inset) * 2 - (itemSpacing)
+        layout.itemSize = CGSize(width: width / 2, height: width / 1.3)
+        
         cityCollectionView.collectionViewLayout = layout
         
-        selectedCities = cityInfo.city
+        travelSegmentedControlSelected(travelSegmentedControl)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setNavigationItemTitle()
+    }
+    
+    func setNavigationItemTitle() {
+        if let nickname = UserDefaults.standard.string(forKey: "nickname") {
+            navigationItem.title = nickname + "님 환영합니다!"
+        } else {
+            navigationItem.title = "인기 도시"
+        }
+    }
+    
+    func setNavigationBarButtonItem() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image:  UIImage(systemName: "person.fill"), style: .plain, target: self, action: #selector(rightBarButtonItemClicked))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "flame.fill"), style: .plain, target: self, action: #selector(leftBarButtonItemClicked))
+        navigationItem.leftBarButtonItem?.tintColor = .red
+    }
+    
+    @objc func rightBarButtonItemClicked() {
+        let vc = storyboard!.instantiateViewController(withIdentifier: ProfileSettingTableViewController.identifier)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func leftBarButtonItemClicked() {
+        let vc = storyboard!.instantiateViewController(withIdentifier: SpotListViewController.identifier)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func setTravelSegmentedControl() {
@@ -44,19 +81,22 @@ class CityViewController: UIViewController, UICollectionViewDelegate, UICollecti
         travelSegmentedControl.insertSegment(withTitle: "모두", at: 0, animated: false)
         travelSegmentedControl.insertSegment(withTitle: "국내", at: 1, animated: false)
         travelSegmentedControl.insertSegment(withTitle: "해외", at: 2, animated: false)
-        travelSegmentedControl.selectedSegmentIndex = 0
+        travelSegmentedControl.selectedSegmentIndex = UserDefaults.standard.integer(forKey: "lastSelectedSegmentIndex") // 최초 선택 시 '0'으로 세팅되어 '모두' 선택됨
     }
     
     @IBAction func travelSegmentedControlSelected(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
             selectedCities = cityInfo.city
+            UserDefaults.standard.set(0, forKey: "lastSelectedSegmentIndex")
             cityCollectionView.reloadData()
         case 1:
             selectedCities = cityInfo.domesticCities
+            UserDefaults.standard.set(1, forKey: "lastSelectedSegmentIndex")
             cityCollectionView.reloadData()
         case 2:
             selectedCities = cityInfo.internationalCities
+            UserDefaults.standard.set(2, forKey: "lastSelectedSegmentIndex")
             cityCollectionView.reloadData()
         default:
             break

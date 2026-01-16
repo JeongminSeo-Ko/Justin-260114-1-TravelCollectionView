@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AdCollectionViewCell" id="gTV-IL-0wX" customClass="AdCollectionViewCell" customModule="Justin_260114_1_TravelCollectionView" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="160"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="160"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNG-RT-2bQ">
+                        <rect key="frame" x="79.333333333333329" y="50" width="41.333333333333329" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="jxf-hZ-o5k"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7jL-vM-Ap4">
+                        <rect key="frame" x="10" y="75" width="180" height="20.333333333333329"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ug5-vw-83L">
+                        <rect key="frame" x="2" y="2" width="196" height="156"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ug5-vw-83L" secondAttribute="trailing" constant="2" id="0CX-WR-PMS"/>
+                <constraint firstItem="7jL-vM-Ap4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="Rhf-tl-IbQ"/>
+                <constraint firstItem="CNG-RT-2bQ" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="TNF-ZV-Goq"/>
+                <constraint firstItem="7jL-vM-Ap4" firstAttribute="top" secondItem="CNG-RT-2bQ" secondAttribute="bottom" constant="5" id="dfm-63-gd1"/>
+                <constraint firstItem="CNG-RT-2bQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="gpG-0V-Yuh"/>
+                <constraint firstItem="CNG-RT-2bQ" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="-20" id="o9A-Rw-HpA"/>
+                <constraint firstAttribute="trailing" secondItem="7jL-vM-Ap4" secondAttribute="trailing" constant="10" id="qHx-bw-OPl"/>
+                <constraint firstAttribute="bottom" secondItem="ug5-vw-83L" secondAttribute="bottom" constant="2" id="qaM-6m-NXv"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="7jL-vM-Ap4" secondAttribute="bottom" constant="10" id="rQY-Fc-EDs"/>
+                <constraint firstItem="ug5-vw-83L" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="uBf-Rq-SKz"/>
+                <constraint firstItem="ug5-vw-83L" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="uMB-0E-TVj"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CNG-RT-2bQ" secondAttribute="trailing" constant="20" id="ypy-rS-dhs"/>
+            </constraints>
+            <size key="customSize" width="200" height="160"/>
+            <connections>
+                <outlet property="adButton" destination="ug5-vw-83L" id="8D6-Mr-ISJ"/>
+                <outlet property="adContentLabel" destination="7jL-vM-Ap4" id="mUe-RL-hu1"/>
+                <outlet property="adLabel" destination="CNG-RT-2bQ" id="nCn-G3-wLa"/>
+            </connections>
+            <point key="canvasLocation" x="18.320610687022899" y="177.46478873239437"/>
+        </collectionViewCell>
+    </objects>
+</document>
